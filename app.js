@@ -3,6 +3,16 @@ const nodemailer = require('nodemailer');
 const dotenv = require("dotenv");
 dotenv.config({ path: "./Email.env" });
 const app = express();
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 app.use(express.json());
 
 app.post("/send-email", async (req, res) => {
